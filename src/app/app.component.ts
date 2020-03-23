@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BlockchainService } from 'src/app/services/blockchain.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'CrazyCoinWebApp';
+  public blockchain;
+
+  constructor(private blockchainService: BlockchainService) {
+    this.blockchain = blockchainService.blockchainInstance;
+  }
+
+  ngOnInit() {
+  }
+
+  thereArePendingTransactions() {
+    return this.blockchain.pendingTransactions.length > 0;
+  }
 }
